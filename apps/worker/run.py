@@ -8,7 +8,6 @@ app = Celery(
     ],
 )
 
-# MQ 인 경우 변경 필요
 app.config_from_object("config")
 
 if __name__ == "__main__":

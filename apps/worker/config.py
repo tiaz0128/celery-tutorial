@@ -19,5 +19,3 @@ result_serializer = "json"
 enable_utc = True
 timezone = "UTC"
 broker_connection_retry_on_startup = True
-
-beat_schedule_filename = "./.temp/celerybeat-schedule"

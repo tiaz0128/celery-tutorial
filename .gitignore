@@ -52,8 +52,10 @@ CHANGELOG.md
 # temp folder
 temp/*
 .temp/*
+**/.temp/*
 logs/*
 .logs/*
+**/logs/*
 !.gitkeep
 
 # pycharm IDE
