@@ -28,6 +28,6 @@ def publish_test():
     b=randint(1,100)
     c=randint(1,100)
 
-    queue.publish_task(a, b, c)
+    queue.publish_task(a=a, b=b, c=c)
 
     return PlainTextResponse(f"{a=},{ b=}, {c=} Published to the queue")
