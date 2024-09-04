@@ -1,0 +1,62 @@
+# byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# tests and coverage
+*.pytest_cache
+.coverage
+
+# database & logs
+*.db
+*.sqlite3
+*.log
+
+# venv
+*.env
+venv
+.venv
+
+# other
+.DS_Store
+
+# sphinx docs 
+_build
+_static
+_templates
+
+# javascript
+package-lock.json
+.vscode/symbols.json
+
+apps/static/assets/node_modules
+apps/static/assets/yarn.lock
+apps/static/assets/.temp
+
+# evn
+local
+
+# etc
+media
+.aws
+# .vscode
+.vscode/*
+
+#file
+requirements-mysql.txt
+requirements-pgsql.txt
+runtime.txt
+Procfile
+LICENSE.md
+CHANGELOG.md
+
+# temp folder
+temp/*
+.temp/*
+logs/*
+.logs/*
+!.gitkeep
+
+# pycharm IDE
+.idea
+
+*.sock
