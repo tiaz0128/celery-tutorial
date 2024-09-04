@@ -1,4 +1,4 @@
-# celery tutorial
+# Celery tutorial
 
 Celery를 사용하여 RabbitMQ로 publish / consume 처리 하기
 
