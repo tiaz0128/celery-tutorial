@@ -5,6 +5,7 @@ app = Celery(
     "Celery Worker",
     include=[
         "tasks.test",
+        "tasks.schedule",
     ],
 )
 
