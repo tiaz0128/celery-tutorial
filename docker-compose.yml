@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  publisher:
+    build:
+      context: .
+      dockerfile: ./apps/publisher/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      RABBITMQ_URL: rabbitmq
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - ./apps/publisher:/app/apps/publisher
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - app-network
+
+  beat:
+    build:
+      context: .
+      dockerfile: ./apps/beat/Dockerfile
+    volumes:
+      - ./apps/beat:/app/apps/beat
+    environment:
+      REDIS_URL: redis
+      RABBITMQ_URL: rabbitmq
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - app-network
+
+  worker:
+    build:
+      context: .
+      dockerfile: ./apps/worker/Dockerfile
+    volumes:
+      - ./apps/worker:/app/apps/worker
+    environment:
+      REDIS_URL: redis
+      RABBITMQ_URL: rabbitmq
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    depends_on:
+      - rabbitmq
+      - redis
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,3 +1,4 @@
+import logging
 from celery import Celery
 
 
@@ -18,10 +19,12 @@ class RabbitQueue:
 
     # Celery 작업을 큐에 추가합니다.
     def publish_task(self, **kwargs):
+        logging.info(f"Publishing task to the queue: {kwargs}")
+        
         self.__celery_app.send_task(
             "tasks.test.consume_task",
             kwargs=kwargs,
             queue="test-queue",
         )
 
-        return {"message": "Report task added to the queue"}
+        

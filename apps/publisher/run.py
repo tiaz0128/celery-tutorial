@@ -1,4 +1,5 @@
 import os
+from random import randint
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
@@ -9,9 +10,9 @@ load_dotenv()
 
 app = FastAPI()
 
-url = os.getenv("DCLO_RABBITMQ_REPORT_SQS")
-user = os.getenv("DCLO_RABBITMQ_DEFAULT_USER")
-pwd = os.getenv("DCLO_RABBITMQ_DEFAULT_PASS")
+url = os.getenv("RABBITMQ_URL")
+user = os.getenv("RABBITMQ_DEFAULT_USER")
+pwd = os.getenv("RABBITMQ_DEFAULT_PASS")
 
 
 @app.get("/")
@@ -23,6 +24,10 @@ def read_root():
 def publish_test():
     queue = RabbitQueue(url, user, pwd)
 
-    queue.publish_task(a=1, b=2, c=3)
+    a=randint(1,100)
+    b=randint(1,100)
+    c=randint(1,100)
 
-    return PlainTextResponse("success")
+    queue.publish_task(a, b, c)
+
+    return PlainTextResponse(f"{a=},{ b=}, {c=} Published to the queue")
