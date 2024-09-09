@@ -12,4 +12,4 @@ RUN poetry install --no-root
 
 COPY ./apps/worker /app/
 
-CMD ["celery", "-A", "run", "worker", "-Q", "test-queue,beat-queue", "--hostname", "worker@%h", "-c", "4", "--loglevel=info"]
+CMD ["celery", "-A", "run", "worker", "-Q", "sum-queue,beat-queue", "--hostname", "worker@%h", "-c", "4", "--loglevel=info"]

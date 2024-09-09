@@ -24,10 +24,9 @@ def read_root():
 def publish_test():
     queue = RabbitQueue(url, user, pwd)
 
-    a=randint(1,100)
-    b=randint(1,100)
-    c=randint(1,100)
+    a = randint(1, 100)
+    b = randint(1, 100)
 
-    queue.publish_task(service="FastAPI", a=a, b=b, c=c)
+    queue.publish_task(service="FastAPI", a=a, b=b)
 
-    return PlainTextResponse(f"FastAPI : {a=},{ b=}, {c=} Published to the queue")
+    return PlainTextResponse(f"FastAPI : {a=},{ b=} Published to the queue")
