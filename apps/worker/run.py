@@ -9,4 +9,4 @@ app = Celery(
     ],
 )
 
-app.config_from_object("config")
+app.config_from_object("celeryconfig")

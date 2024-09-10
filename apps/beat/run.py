@@ -7,7 +7,7 @@ app = Celery(
         "tasks.schedule",
     ],
 )
-app.config_from_object("config")
+app.config_from_object("celeryconfig")
 
 # task 함수 주기 설정
 app.conf.beat_schedule = {

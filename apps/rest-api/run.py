@@ -20,8 +20,8 @@ def read_root():
     return PlainTextResponse("healthy")
 
 
-@app.get("/test")
-def publish_test():
+@app.get("/publish")
+def publish_task():
     queue = RabbitQueue(url, user, pwd)
 
     a = randint(1, 100)
