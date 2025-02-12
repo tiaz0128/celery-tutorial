@@ -1,12 +1,9 @@
 from celery import Celery
 
-
 app = Celery(
     "Celery Worker",
     include=[
-        "tasks.math",
-        "tasks.schedule",
-        "tasks.word",
+        "tasks.sum",
     ],
 )
 
