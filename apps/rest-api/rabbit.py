@@ -17,11 +17,11 @@ class RabbitQueue:
         return cls._instance
 
     # Celery 작업을 큐에 추가합니다.
-    def publish_task(self, **kwargs):
+    def publish_task(self, queue, /, **kwargs):
         logging.info(f"Publishing task to the queue: {kwargs}")
 
         self._celery_app.send_task(
-            "tasks.sum.consume_task",
+            "tasks.math.sum",
             kwargs=kwargs,
-            queue="sum-queue",
+            queue=queue,
         )

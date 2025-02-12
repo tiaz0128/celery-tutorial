@@ -9,7 +9,7 @@ def schedule_task():
     b = randint(1, 100)
 
     app.send_task(
-        "tasks.sum.consume_task",
+        "tasks.math.sum",
         kwargs={"service": "Beat", "a": a, "b": b},
         queue="sum-queue",
     )

@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "celery-temp"
+name = "celery-tutorial"
 version = "0.1.0"
 description = ""
-authors = ["dev0128 <joo@clo-guard.com>"]
+authors = ["tiaz0128 <tiaz0128.dev@google.com>"]
 readme = "README.md"
 package-mode = false
 

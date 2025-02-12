@@ -4,7 +4,7 @@ from celery import Celery
 app = Celery(
     "Celery Worker",
     include=[
-        "tasks.sum",
+        "tasks.math",
         "tasks.schedule",
     ],
 )
