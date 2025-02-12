@@ -14,8 +14,8 @@ def sum(service, a, b):
 
 @app.task(queue="multiply-queue")
 def multiply(nums):
-
     logging.info(f"multiply nums : {nums}")
+
     x, y = nums
     result = x * y
 

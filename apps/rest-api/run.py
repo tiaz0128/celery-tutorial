@@ -14,12 +14,13 @@ app = FastAPI()
 url = os.getenv("RABBITMQ_URL")
 user = os.getenv("RABBITMQ_DEFAULT_USER")
 pwd = os.getenv("RABBITMQ_DEFAULT_PASS")
-REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")  # Redis URL 명확하게 설정
+
+REDIS_URL = os.getenv("REDIS_URL")
 
 celery = Celery(
-    "Math Operations",
+    "Publisher FastAPI",
     broker=f"pyamqp://{user}:{pwd}@{url}//",
-    backend=REDIS_URL,
+    backend=f"redis://{REDIS_URL}:6379/0",
 )
 
 
@@ -66,5 +67,26 @@ async def parallel_operation():
     callback = signature("tasks.math.multiply", queue="multiply-queue")
 
     result = chord(task_group)(callback)
+
+    return PlainTextResponse(f"Task Submitted, Result ID: {result.id}")
+
+
+@app.get("/word")
+def parallel_operation():
+    workflow = chain(
+        group(
+            signature(
+                "tasks.word.hello",
+                queue="hello-queue",
+            ),
+            signature(
+                "tasks.word.world",
+                queue="world-queue",
+            ),
+        ),
+        signature("tasks.word.concat_words", queue="concat-queue"),
+    )
+
+    result = workflow.apply_async()
 
     return PlainTextResponse(f"Task Submitted, Result ID: {result.id}")

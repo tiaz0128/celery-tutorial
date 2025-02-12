@@ -6,6 +6,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      REDIS_URL: redis
       RABBITMQ_URL: rabbitmq
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest

@@ -6,6 +6,7 @@ app = Celery(
     include=[
         "tasks.math",
         "tasks.schedule",
+        "tasks.word",
     ],
 )
 
